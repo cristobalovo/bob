@@ -1,13 +1,20 @@
 import React, { useEffect }  from 'react'
-import { Button } from 'antd'
 import Nav from '../../components/shared/nav'
+import Sidebar from '../../components/shared/sidebar'
 import Browser from '../../components/shared/browser';
+
+
 
 const Home = () => {
   return (
-    <div>
-      <Nav/>
-      <Browser />
+    <div className="canvas flex">
+      <div className="top">
+        <Nav/>
+      </div>
+      <div className="bottom flex">
+        <Sidebar />
+        <Browser />
+      </div>
     </div>
   )
 }

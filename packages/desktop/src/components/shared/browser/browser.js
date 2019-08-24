@@ -11,11 +11,11 @@ const Browser = () => {
   }, [])
 
   const renderWebview = () => {
-    return <webview id="foo" src={currentSearch} style={{ width:'100%', height:'600px'}} ></webview>
+    return <webview id="foo" src={currentSearch}></webview>
   }
 
   return (
-    <div>
+    <div className="browser">
       {
         !loaded ? "loading..." : renderWebview()
       }
