@@ -3,10 +3,18 @@
 @import './flex-layout.less';
 @import './common.less';
 
+
+/* 
+Clearing all unnecesarry ant-design code
+*/ 
 #app {
     margin:0px;
     padding:0px;
 }
+
+/*
+Setting some less-variables
+*/
 .boxing {
     box-sizing: border-box;
 }
@@ -15,6 +23,25 @@
     .boxing();
 }
 
+
+
+/*
+All things home.js
+*/
+.canvas {
+    flex-direction: column;
+    height: 100vh;
+}
+
+.canvas .bottom {
+    flex-direction: row;
+    height: ~"calc(100vh - 104px)";
+}
+
+
+/*
+All things nav.js
+*/
 .sticky-header {
     position:sticky;
     top: 0;
@@ -37,7 +64,6 @@
     padding-left: 0;
     min-width: 50px;
 }
-
 .sticky-header .right .navbtns Button {
     background: none;
 	color: inherit;
@@ -49,7 +75,6 @@
     width: 24px;
     height: 24px;
 }
-
 .sticky-header .mid Input {
     background: #F4F4F4;
     border-radius: 35px;
@@ -57,7 +82,6 @@
     .boxing();
     padding: 20px;    
 }
-
 .ant-input-affix-wrapper .ant-input:not(:first-child) {
     padding-left: 40px;
 }
@@ -65,8 +89,10 @@
     left: 15px;
 }
 
-
-.exampleheight {
-    height: 2000px;
-    background: rgb(244, 244, 244);
+/*
+All things browser.js
+*/
+webview {
+    width: 100vw;
+    height: 100%;
 }
