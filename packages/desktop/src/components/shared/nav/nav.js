@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Input, Tooltip, Icon, Avatar, Button } from 'antd';
 import { setSearchText } from '../../../redux/actions/actionCreators/search';
+import { toggleSider } from '../../../redux/actions/actionCreators/siteNavigation';
 
 const Nav = () => {
   const [url, setUrl] = useState("")
+  const siderOpen = useSelector(state => state.navigation.siderOpen);
   const logoLink = 'https://avatars1.githubusercontent.com/u/19377315?s=400&v=4';
   const dispatch = useDispatch();
 
@@ -18,19 +20,22 @@ const Nav = () => {
     setUrl(e.target.value)
   }
 
+  const toggleSiderMenu = () => {      
+    dispatch(toggleSider(!siderOpen))
+  };
+
   return (
     <div className="sticky-header flex">
         <div className="left flex">
             <Avatar size={64} src={`${logoLink}`} />
-            <Button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 28 22">
-                <g id="MENU_BTN" transform="translate(-149 -78)">
-                    <rect className="st1" id="Rectangle_20" width="26" height="2" transform="translate(149 78)"/>
-                    <rect className="st1" id="Rectangle_21" width="26" height="2" transform="translate(149 88)"/>
-                    <rect className="st1" id="Rectangle_22" width="26" height="2" transform="translate(149 98)"/>
-                </g>
-            </svg>
-
+            <Button  onClick={() => toggleSiderMenu()}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 28 22">
+                    <g id="MENU_BTN" transform="translate(-149 -78)">
+                        <rect className="st1" id="Rectangle_20" width="26" height="2" transform="translate(149 78)"/>
+                        <rect className="st1" id="Rectangle_21" width="26" height="2" transform="translate(149 88)"/>
+                        <rect className="st1" id="Rectangle_22" width="26" height="2" transform="translate(149 98)"/>
+                    </g>
+                </svg>
             </Button>
         </div>
         <div className="mid">
