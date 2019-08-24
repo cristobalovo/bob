@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import { Input } from 'antd';
 
 const Finance = () => {
-  const []
   return (
     <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
