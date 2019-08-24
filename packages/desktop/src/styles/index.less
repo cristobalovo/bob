@@ -3,13 +3,13 @@
 @import './flex-layout.less';
 @import './common.less';
 
-
 /* 
 Clearing all unnecesarry ant-design code
 */ 
 #app {
     margin:0px;
     padding:0px;
+    font-family: 'Muli', sans-serif;
 }
 
 /*
@@ -139,16 +139,17 @@ All things sidebar.js
     background: black;
     .heightsidebarcalc();
     margin-top: 20px;
-
 }
 .collapsed {
     width: 88px;
     border-radius: 0px 25px 0px 0px;  
 }
 .expanded {
-    width: 30vw;
-    max-width: 300px;
+    width: 33vw;
+    // max-width: 500px;
+    border-radius: 0px 25px 0px 0px;     
 }
+
 .sidebar .icons {
     width: 100px;
     flex-direction: column;
@@ -171,13 +172,145 @@ All things sidebar.js
     border-radius: none;
 }
 
-.sidebar .icons Button .st0{
+.st0{
     fill:white;
+}
+.st3{
+    fill: #383d42;
 }
 .sidebar .icons Button:hover .st0 {
     fill:#2BB5FF;
 }
-
 .spacer {
     flex:1;
 }
+.sidebar_inner {
+    position: absolute;
+    background: black;
+    .heightsidebarcalc();
+    .boxing();
+    overflow-y: scroll;
+    margin-top: 20px;
+    flex-direction: column;
+}
+.sidebar_inner_title {
+    position: sticky;
+    top:0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    .boxing();
+    border-bottom: 1px dashed #383d42;
+    padding: 20px 0 10px 0;
+    border-radius: 0px 25px 0px 0px;     
+    background-color:black;
+}
+.sidebar_inner_title h1 {
+    color: white;
+}
+.sidebar_inner_title Button {
+    background: none;
+	color: white;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    margin-right: 20px;
+}
+.sidebar_inner_title Button:hover, .sidebar_inner_title Button:active,.sidebar_inner_title Button:not(:active) {
+    background: none;
+	color: white;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+}
+.sidebar_inner_title Button:hover .st0 {
+    fill:#2BB5FF;
+}
+.sidebar_inner_title_icon {
+    width: 58px;
+    height: 58px;
+    margin-left:10px;
+}
+
+.sidebar_inner_content {
+    flex:1;
+    flex-direction: column;
+}
+
+.sidebar_inner_content_msg {
+    text-align: center;
+    .boxing();
+    padding: 20px 20px 0px 20px;
+}
+.sidebar_inner_content_msg h3 {
+    color: white;
+}
+.metrics {
+    flex-direction: column;
+}
+
+.metric_box {
+    .boxing();
+    padding: 20px;
+    width: inherit;
+    flex-direction: column;
+    border-bottom: 1px dashed #383d42;
+}
+
+.metric {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: white;
+}
+
+.metric_value h1 {
+    color: white;
+}
+.metric_value h1 {
+    color: white;
+}
+.metric_expression {
+    margin: 0 0 2px 8px;
+}
+.button_box {
+    .boxing();
+    padding: 20px;
+}
+.button_box Button {
+    width: 100%;
+    margin-top: 10px;
+
+}
+.button_box Input {
+    color:white;
+    background: #383d42;
+    border:none;
+}
+.button_box .ant-input-suffix {
+    color:white;
+}
+
+
+
+
+.testbox {
+    height: 20px;
+    width: inherit;
+    border:1px solid white;
+    background:red;
+}
+
+/*
+All thing finance.js
+*/
+
+
+
+/*
+All thing bids.js
+*/
