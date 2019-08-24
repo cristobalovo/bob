@@ -2,7 +2,7 @@ import React from 'react'
 
 const Bids = () => {
   return (
-    <div>
+    <div className="sidebar_inner expanded flex">
       Bids page: stub
     </div>
   )
