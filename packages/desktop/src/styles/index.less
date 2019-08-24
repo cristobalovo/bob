@@ -19,10 +19,15 @@ Setting some less-variables
     box-sizing: border-box;
 }
 .sticky-header-paddings {
-    padding: 20px;
+    padding: 20px 20px 15px 20px;
     .boxing();
 }
-
+.heightcalc {
+    height: ~"calc(100vh - 101px)";
+}
+.heightsidebarcalc {
+    height: ~"calc(100vh - 121px)";
+}
 
 
 /*
@@ -35,7 +40,7 @@ All things home.js
 
 .canvas .bottom {
     flex-direction: row;
-    height: ~"calc(100vh - 104px)";
+    .heightcalc();
 }
 
 
@@ -50,10 +55,34 @@ All things nav.js
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px solid #F4F4F4;
 }
 .sticky-header .left {
     .sticky-header-paddings();
+    align-items: center;
+    justify-content: center;
+    padding-right:0;
 }
+.sticky-header .left Button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+}
+
+.sticky-header .left Button .st1{
+    fill:black;
+}
+.sticky-header .left Button:hover .st1{
+    fill:#2BB5FF;
+}
+.sticky-header .left Button:active .st1{
+    outline:none;
+}
+
 .sticky-header .mid {
     .sticky-header-paddings();
     flex: 1;
@@ -92,7 +121,63 @@ All things nav.js
 /*
 All things browser.js
 */
-webview {
+.browser {
     width: 100vw;
-    height: 100%;
+    .heightcalc();
+}
+webview {
+    width: 100%;
+    .heightcalc();
+}
+
+
+/*
+All things sidebar.js
+*/
+.sidebar {
+    position: absolute;
+    background: black;
+    .heightsidebarcalc();
+    margin-top: 20px;
+
+}
+.collapsed {
+    width: 88px;
+    border-radius: 0px 25px 0px 0px;  
+}
+.expanded {
+    width: 30vw;
+    max-width: 300px;
+}
+.sidebar .icons {
+    width: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .boxing();
+    padding: 35px 0 35px 0;
+}
+
+.sidebar .icons Button:first-child {
+    margin-bottom: 5px;
+} 
+
+.sidebar .icons Button {
+    margin-bottom: 15px;
+    background-color: black;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: none;
+}
+
+.sidebar .icons Button .st0{
+    fill:white;
+}
+.sidebar .icons Button:hover .st0 {
+    fill:#2BB5FF;
+}
+
+.spacer {
+    flex:1;
 }

@@ -7,14 +7,14 @@ import Browser from '../../components/shared/browser';
 
 const Home = () => {
   return (
-    <div class="canvas flex">
-      <div class="top">
+    <div className="canvas flex">
+      <div className="top">
         <Nav/>
       </div>
-      <div class="bottom">
+      <div className="bottom flex">
         <Sidebar />
-        <Browser />   
-      </div>   
+        <Browser />
+      </div>
     </div>
   )
 }
