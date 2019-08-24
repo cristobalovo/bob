@@ -3,6 +3,9 @@ import { Button } from 'antd';
 import { Input } from 'antd';
 
 const Finance = () => {
+  // need to know if this current domain has been registered
+  // if it is deployed and if you have invested
+  // render out diff stuff depending on the above
   return (
     <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
