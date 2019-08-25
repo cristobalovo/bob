@@ -1,15 +1,18 @@
-import React, { useEffect }  from 'react'
+import React, { useEffect, useState }  from 'react'
 import { useSelector } from 'react-redux';
 import Nav from '../../components/shared/nav'
 import Sidebar from '../../components/shared/sidebar'
 import Browser from '../../components/shared/browser';
 import Finance from '../../components/finance';
+import Posts from '../../components/post';
+import Chat from '../../components/finance';
 import Bids from '../../components/bids';
-import Post from '../../components/post';
-import Chat from '../../components/chat';
+// import { siteNavigation } from '../../redux/actions/actionCreators/siteNavigation';
 
 const Home = () => {
-  const siderOpen = useSelector(state => state.navigation.siderOpen);
+  const nav = useSelector(state => state.navigation);
+  const { sideNavIndex, siderOpen } = nav;
+
   return (
     <div className="canvas flex">
       <div className="top">
@@ -17,7 +20,19 @@ const Home = () => {
       </div>
       <div className="bottom flex">
         {
-          siderOpen ? <Sidebar /> : <Chat />
+          siderOpen ? <Sidebar /> : null
+        }
+        {
+          sideNavIndex === 0 && siderOpen ? <Posts /> : null
+        }
+        {
+          sideNavIndex === 1 && siderOpen ? <Finance /> : null
+        }
+        {
+          sideNavIndex === 2 && siderOpen ? <Chat /> : null
+        }
+        {
+          sideNavIndex === 3 && siderOpen ? <Bids /> : null
         }
         <Browser />
       </div>
