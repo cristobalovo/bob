@@ -20913,7 +20913,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.13",
-  "updatedAt": "2019-08-24T23:12:44.607Z",
+  "updatedAt": "2019-08-25T04:12:03.084Z",
   "devdoc": {
     "methods": {
       "createBid(uint256,bytes32)": {

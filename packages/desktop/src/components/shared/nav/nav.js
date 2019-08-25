@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Input, Tooltip, Icon, Avatar, Button } from 'antd';
 import { setSearchText, setCurrentDomainRegStatus, setNonRenderingSearch } from '../../../redux/actions/actionCreators/search';
-import { toggleSider } from '../../../redux/actions/actionCreators/siteNavigation';
 import { setProvider, setWallet } from  '../../../redux/actions/actionCreators/crypto';
 
 import { 
@@ -13,6 +12,23 @@ import {
     DomainRegistry,
     isUrlInRegistry,
   } from '../../../service/contracts/shared';
+// import { setSearchText } from '../../../redux/actions/actionCreators/search';
+import { hashDomainUrl } from '../../../shared/helpers/domain';
+// import { getWalletProvider } from '../../../shared/helpers/provider';
+import { generateWallet } from '../../../shared/helpers/user';
+import { deployDomainRegistry, deployDomainDAO, deployAdvertisingDAO } from '../../../shared/helpers/deployment';
+import Box from '3box';
+import HDWalletProvider from "truffle-hdwallet-provider";
+import { toggleSider, setCommentFeed } from '../../../redux/actions/actionCreators/siteNavigation';
+import { 
+  get3BoxWalletProvider, 
+  getBobBox,
+  getDomainSpace,
+  createPostThread,
+  getAllThreads,
+  commentOnPostThread,
+  createAdminThread
+} from '../../../service/utils-3box';
 
 const Nav = () => {
   const [url, setUrl] = useState("")
@@ -57,6 +73,30 @@ const Nav = () => {
     dispatch(setNonRenderingSearch(e.target.value)) // i want to check every hash -> dont want to force to render the site for this
     // isDomainRegistered(provider, wallet)
   }
+
+	const submit = async() => {
+    const url = "https://google.com/dogs5"
+    const provider = await get3BoxWalletProvider();
+    console.log({provider})
+    // fetch initial topics
+    const bobBox = await getBobBox();
+    let space = await getDomainSpace(url);
+    console.log({space})
+    let thread = await createPostThread(
+      url, 
+      "This is the title", 
+      Math.random().toString(36).substring(7) // Using a random string for description to add randomness
+    );
+    let threads = await getAllThreads(url);
+    console.log({threads})
+    let postsComment = await commentOnPostThread(url, threads[0].address, "This is a comment");
+    console.log({postsComment})
+    dispatch(setCommentFeed(postsComment))
+    let memberThread = await createAdminThread(url);
+    console.log({memberThread});
+	}
+
+	
 
   const toggleSiderMenu = () => {      
     dispatch(toggleSider(!siderOpen))
@@ -103,6 +143,7 @@ const Nav = () => {
         />
         </div>
         <Button onClick={() => checkIfRegistered()}> check </Button>
+        <Button onClick={() => submit()}></Button>
         <div className="right">
             <div className="navbtns">
             <Button>

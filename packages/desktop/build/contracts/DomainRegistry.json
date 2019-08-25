@@ -1344,7 +1344,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.13",
-  "updatedAt": "2019-08-24T23:12:44.615Z",
+  "updatedAt": "2019-08-25T04:12:03.092Z",
   "devdoc": {
     "methods": {},
     "title": "DomainRegistry - Used as a universal registry to store deployed domainDAOs. "
