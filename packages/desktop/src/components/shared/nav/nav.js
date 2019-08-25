@@ -127,7 +127,7 @@ const Nav = () => {
         />
         </div>
         <Button onClick={() => checkIfRegistered()}> check </Button>
-        <Button onClick={() => submit()}></Button>
+        <Button onClick={() => submit()}> load </Button>
         <div className="right">
             <div className="navbtns">
             <Button>

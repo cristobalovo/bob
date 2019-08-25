@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import { Input } from 'antd';
@@ -7,10 +7,46 @@ import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators
 
 const Bids = () => {
   const dispatch = useDispatch();
+  const [newBid, openNewBid] = useState(false);
+
+  const [companyName, setCompanyName] = useState("");
+  const [adDesc, setAdDesc] = useState("");
+  const [timePeriod, setTimePeriod] = useState(0);
+  const [bidPrice, setBidPrice] = useState("");
+
+  const tempSearchText = useSelector(state => state.search.tempSearchString);
 
   const closeMenu = () => {
     dispatch(toggleSider(false))
     dispatch(siteNavigation(10))
+  }
+
+  const createNewBid = () => {
+    openNewBid(true);
+  }
+
+  const submitBid = () => {
+    openNewBid(false);
+  }
+
+  const handleCompany = (e) => {
+    console.log('handleInputChange', { e });
+    setCompanyName(e.target.value);
+  }
+
+  const handleDesc = (e) => {
+    console.log('handleInputChange', { e });
+    setAdDesc(e.target.value);
+  }
+
+  const handleTime = (e) => {
+    console.log('handleInputChange', { e });
+    setTimePeriod(e.target.value);
+  }
+
+  const handlePrice = (e) => {
+    console.log('handleInputChange', { e });
+    setBidPrice(e.target.value);
   }
 
   return (
@@ -52,29 +88,30 @@ const Bids = () => {
           </div>
       </section> */}
 
-      
-      <section id="bids_home">
-        <div className="button_box">
-          <Button type="primary">+ New bid</Button>
-        </div>
-      </section>
-
-      <section id="bids_new">
-        <div className="newbid">
-          <Input placeholder="Company Name" />
-          <TextArea
-            placeholder="Advertisement Description"
-            autosize={{ minRows: 4, maxRows: 10 }}
-          />
-          <Input placeholder="Advertising Time Period" suffix="days" />
-          <Input placeholder="Bid Price" suffix="ETH" />
-        </div>
-        <div className="newbid_button_box">
-          <Button type="primary">Submit</Button>
-        </div>
-      </section>
-
-
+      {
+        !newBid 
+          ? <section id="bids_home">
+            <div className="button_box">
+              <Button type="primary" onClick={() => createNewBid()}>+ New bid</Button>
+            </div>
+        </section>
+        :  <section id="bids_new">
+            <div className="newbid">
+              <Input placeholder="Company Name" onClick={() => handleCompany()} />
+              <TextArea
+                placeholder="Advertisement Description"
+                autosize={{ minRows: 4, maxRows: 10 }}
+                onClick={() => handleDesc()}
+              />
+              <Input placeholder="Advertising Time Period" suffix="days" onClick={() => handleTime()} />
+              <Input placeholder="Bid Price" suffix="ETH" onClick={() => handlePrice()} />
+            </div>
+            <div className="newbid_button_box">
+              <Button type="primary">Submit</Button>
+            </div>
+          </section>
+      }
+    
         
       <div className="bid_box flex">
 
