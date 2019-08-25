@@ -30,11 +30,11 @@ Setting some less-variables
 }
 .cleanbutton {
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
     outline: inherit;
 }
 
@@ -175,6 +175,9 @@ All things sidebar.js
 .st3{
     fill: #383d42;
 }
+.st4{
+    fill: #2BB5FF;
+}
 .sidebar .icons Button:hover .st0 {
     fill:#2BB5FF;
 }
@@ -207,23 +210,11 @@ All things sidebar.js
     color: white;
 }
 .sidebar_inner_title Button {
-    background: none;
-	color: white;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
     margin-right: 20px;
 }
 .sidebar_inner_title Button:hover, .sidebar_inner_title Button:active,.sidebar_inner_title Button:not(:active) {
-    background: none;
-	color: white;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
 }
 .sidebar_inner_title Button:hover .st0 {
     fill:#2BB5FF;
@@ -367,7 +358,6 @@ All thing post.js
     padding: 0px 20px 30px 20px;
     border-bottom: 1px dashed #383d42;
 }
-
 .newpost_button_box Button {
     width: 100%;
     margin-top: 10px;
@@ -377,7 +367,6 @@ All thing post.js
     background: #383d42;
     border:none;
 }
-
 .newpost TextArea {
     color:white;
     background: #383d42;
@@ -389,12 +378,136 @@ All thing post.js
 /*
 All thing bids.js
 */
-
-
-
-.testbox {
-    height: 20px;
-    width: inherit;
-    border:1px solid white;
-    background:red;
+.newbid {
+    .boxing();
+    padding: 30px 20px 10px 20px;
 }
+.newbid_button_box {
+    .boxing();
+    padding: 0px 20px 30px 20px;
+    border-bottom: 1px dashed #383d42;
+}
+.newbid_button_box Button {
+    width: 100%;
+    margin-top: 10px;
+}
+.newbid Input {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+.newbid TextArea {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+.ant-input-affix-wrapper .ant-input-prefix, .ant-input-affix-wrapper .ant-input-suffix {
+    margin-top: 6px;  
+    color:white;
+}
+.bid_box {
+    .boxing();
+    padding: 20px 20px 20px 20px;
+    flex-direction: column;
+    border-bottom: 1px dashed #383d42;
+
+}
+.bid_box .companyname {
+    color: white;
+    margin: 4px 0;
+}
+.bid_box .bidconditions {
+    color: white;
+    font-size: 1.2rem;
+}
+.bid_content {
+    flex-direction: column;
+}
+.biddescr {
+    font-size: 0.65rem;
+    margin-bottom: 10px;
+}
+.bid_voters {
+    flex-direction: row;
+}
+
+.bid_voters Button {
+    .cleanbutton();
+    width: 40px;
+    height: 40px;
+}
+.bid_voters Button:hover, .bid_voters Button:active, .bid_voters Button:not(:active) {
+    .cleanbutton();
+}
+.bid_voters Button:hover, .bid_voters Button .st0:hover {
+    cursor: pointer;
+}
+.bid_voters Button:hover .st0 {
+    fill: #2BB5FF;
+}
+.bid_content .votessofar {
+    margin-top: 10px;
+}
+
+
+
+
+
+.chat_canvas {
+    background:white;
+    flex:1;
+    border-right: 2px solid black;
+    flex-direction: column-reverse;
+    .boxing();
+    padding: 20px;
+}
+.chat_input {
+    width: inherit;
+    height: 100px;
+    background: #F4F4F4;
+    border-right: 2px solid black;
+    flex-direction: row;
+    .boxing();
+    padding: 20px;
+}
+.chat_input TextArea {
+    color:black;
+    background: white;
+    border:none;
+}
+.chat_input Button {
+    width: 60px;
+    height: 60px;
+    background:red;
+    .cleanbutton();
+}
+.chat_input Button:hover {
+    cursor:pointer;
+}
+
+.chat_input Button:hover, .chat_input Button:active,.chat_input Button:not(:active) {
+    .cleanbutton();
+}
+.chat_mymsg {
+    width: inherit;
+    .boxing();
+    padding: 5px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.chat_theirmsg {
+    width: inherit;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.name {
+    font-size:0.6rem;
+    color: #a3a3a3;
+}
+
+

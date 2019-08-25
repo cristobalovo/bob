@@ -1,8 +1,9 @@
 import * as actions from '../actions/actionTypes/siteNavigation';
   
   const INITIAL_STATE = {
-    sideNavIndex: 0,
+    sideNavIndex: 10,
     siderOpen: false,
+    feed: []
   };
   
   export default (state = INITIAL_STATE, action) => {
@@ -17,6 +18,11 @@ import * as actions from '../actions/actionTypes/siteNavigation';
             ...state, 
             siderOpen: action.payload
         };
+      case actions.SET_COMMENTS_FROM_3: 
+        return {
+          ...state,
+          feed: action.payload,
+        }
       default:
         return state;
     }
