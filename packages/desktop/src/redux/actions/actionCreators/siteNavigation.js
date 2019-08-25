@@ -17,3 +17,12 @@ export const toggleSider = (flag) => {
         })
     }
 }
+
+export const setCommentFeed = (feed) => {   
+    return (dispatch) => {
+        dispatch({
+            type: actions.SET_COMMENTS_FROM_3,
+            payload: feed
+        })
+    }
+}
