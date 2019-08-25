@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Input, Tooltip, Icon, Avatar, Button } from 'antd';
-import { setSearchText } from '../../../redux/actions/actionCreators/search';
+import { setSearchText, setCurrentDomainRegStatus } from '../../../redux/actions/actionCreators/search';
 import { toggleSider } from '../../../redux/actions/actionCreators/siteNavigation';
+
+import { 
+    getWalletProvider, 
+    getWallet,
+    getContractInstance,
+    DomainRegistry,
+    isUrlInRegistry,
+  } from '../../../service/contracts/shared';
 
 const Nav = () => {
   const [url, setUrl] = useState("")
@@ -11,18 +19,54 @@ const Nav = () => {
   const logoLink = 'https://avatars1.githubusercontent.com/u/19377315?s=400&v=4';
   const dispatch = useDispatch();
 
+  //
+  const searchState = useSelector(state => state.search.currentSearch);
+  const [provider, setProvider] = useState({})
+  const [wallet, setWallet] = useState({})
+  const [currentDomainRegistered, setDomainRegistration] = useState(false);
+  let registryAddress = "0x132efA3675cd66aA2780e01C095e2337188b0F6b";
+
+  useEffect(() => {
+    setupUser()
+  }, [])
+
+  // NOTE: this will check what is in state -> not in redux
+  const isDomainRegistered = async (p, w) => {              
+    const registryInstance = getContractInstance(DomainRegistry.abi, registryAddress, w.privateKey );
+    const isRegistered = await isUrlInRegistry(registryInstance, url);
+    setDomainRegistration(isRegistered);    
+    dispatch(setCurrentDomainRegStatus(isRegistered)); //set for finance or others
+  }
+
+    // sets wallet and provider
+    const setupUser = async () => {
+      const providerObj = getWalletProvider();
+      setProvider(providerObj);
+      const walletObj = await getWallet(providerObj);
+      setWallet(walletObj);
+    //   isDomainRegistered(providerObj, walletObj);
+    }
+
   // have the url ready if the browser needs it :)
   const handleChange = (e) => {
     if (e.key === 'Enter') {
-        dispatch(setSearchText(url))
+        dispatch(setSearchText(url)) // will change what is displayed in the browser
         return;
     }
     setUrl(e.target.value)
+    // isDomainRegistered(provider, wallet)
   }
 
   const toggleSiderMenu = () => {      
     dispatch(toggleSider(!siderOpen))
   };
+
+  const checkIfRegistered = () => {
+    console.log('====================================');
+    console.log('onchange', { wallet, provider });
+    isDomainRegistered(provider, wallet)
+    console.log('====================================');
+  }
 
   return (
     <div className="sticky-header flex">
@@ -57,6 +101,7 @@ const Nav = () => {
         }
         />
         </div>
+        <Button onClick={() => checkIfRegistered()}> check </Button>
         <div className="right">
             <div className="navbtns">
             <Button>

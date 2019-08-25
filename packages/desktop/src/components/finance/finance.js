@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { Input } from 'antd';
 
@@ -6,6 +7,9 @@ const Finance = () => {
   // need to know if this current domain has been registered
   // if it is deployed and if you have invested
   // render out diff stuff depending on the above
+  const isDomainRegistered = useSelector(state => state.search.currentSearchRegistered);
+  console.log({ isDomainRegistered }, 'redux from finance');
+  
   return (
     <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
@@ -44,17 +48,20 @@ const Finance = () => {
 
       </Button>
       </div>
-      <section id="no_dao_yet">
-        <div className="sidebar_inner_content_msg">
-          <h3>No DAO created for this URL.</h3>
-          <p>Creating a DAO will cost you 0.7ETH.</p>
-        </div>
-        <div className="button_box">
-            <Button type="primary">Create DAO</Button>
-          </div>
-      </section>
 
-      <section id="user_has_not_invested">
+      {
+        !isDomainRegistered
+        ?   <section id="no_dao_yet">
+              <div className="sidebar_inner_content_msg">
+                <h3>No DAO created for this URL.</h3>
+                <p>Creating a DAO will cost you 0.7ETH.</p>
+              </div>
+              <div className="button_box">
+                  <Button type="primary">Create DAO</Button>
+                </div>
+            </section>
+        : <div>
+                <section id="user_has_not_invested">
         <div className="sidebar_inner_content flex">
           <div className="metrics">
             <div className="metric_box">
@@ -153,6 +160,13 @@ const Finance = () => {
           </div>
         </div>
       </section>
+          </div>
+      }
+
+
+    
+
+
 
 
 
