@@ -9,7 +9,7 @@ import { generateWallet } from '../../../shared/helpers/user';
 import { deployDomainRegistry, deployDomainDAO, deployAdvertisingDAO } from '../../../shared/helpers/deployment';
 import Box from '3box';
 import HDWalletProvider from "truffle-hdwallet-provider";
-import { toggleSider } from '../../../redux/actions/actionCreators/siteNavigation';
+import { toggleSider, setCommentFeed } from '../../../redux/actions/actionCreators/siteNavigation';
 import { 
   get3BoxWalletProvider, 
   getBobBox,
@@ -53,6 +53,7 @@ const Nav = () => {
     console.log({threads})
     let postsComment = await commentOnPostThread(url, threads[0].address, "This is a comment");
     console.log({postsComment})
+    dispatch(setCommentFeed(postsComment))
     let memberThread = await createAdminThread(url);
     console.log({memberThread});
 	}
