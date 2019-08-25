@@ -19,7 +19,8 @@ const Home = () => {
         <Nav/>
       </div>
       <div className="bottom flex">
-        {
+        <Finance />
+        {/* {
           siderOpen ? <Sidebar /> : null
         }
         {
@@ -33,7 +34,7 @@ const Home = () => {
         }
         {
           sideNavIndex === 3 && siderOpen ? <Bids /> : null
-        }
+        } */}
         <Browser />
       </div>
     </div>
