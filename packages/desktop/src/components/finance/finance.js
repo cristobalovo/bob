@@ -2,14 +2,41 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { Input } from 'antd';
+import { getWalletProvider, getWallet, deployDomainDAO } from '../../service/contracts/shared';
+
+let registryAddress = "0x132efA3675cd66aA2780e01C095e2337188b0F6b";
 
 const Finance = () => {
   // need to know if this current domain has been registered
   // if it is deployed and if you have invested
   // render out diff stuff depending on the above
   const isDomainRegistered = useSelector(state => state.search.currentSearchRegistered);
-  console.log({ isDomainRegistered }, 'redux from finance');
+  const crypto = useSelector(state => state.crypto);
+  const tempSearch = useSelector(state => state.search.tempSearchString);
+  // tempSearchString
+  const { provider, wallet } = crypto;
+
+  console.log('finance shit', { provider, wallet });
   
+  // const search = useSelector(state => state.search.currentSearchRegistered);
+  // console.log({ isDomainRegistered }, 'redux from finance');
+  
+  const deployDAO = async () => {
+    console.log('in DEPLOY DO');
+    
+    const providerObj = getWalletProvider();
+    // setProvider(providerObj);
+    const walletObj = await getWallet(providerObj);
+    console.log('====================================');
+    console.log('in deploy dao', { providerObj, walletObj, tempSearch });
+    console.log('====================================');
+    const newDAOAddress = deployDomainDAO(walletObj, tempSearch, registryAddress);
+    console.log({ newDAOAddress });
+    
+    // setWallet(walletObj);
+    // deploy dao
+  }
+
   return (
     <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
@@ -57,7 +84,7 @@ const Finance = () => {
                 <p>Creating a DAO will cost you 0.7ETH.</p>
               </div>
               <div className="button_box">
-                  <Button type="primary">Create DAO</Button>
+                  <Button type="primary"  onClick={() => deployDAO()}>Create DAO</Button>
                 </div>
             </section>
         : <div>

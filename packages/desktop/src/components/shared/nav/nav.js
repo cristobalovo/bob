@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Input, Tooltip, Icon, Avatar, Button } from 'antd';
-import { setSearchText, setCurrentDomainRegStatus } from '../../../redux/actions/actionCreators/search';
+import { setSearchText, setCurrentDomainRegStatus, setNonRenderingSearch } from '../../../redux/actions/actionCreators/search';
 import { toggleSider } from '../../../redux/actions/actionCreators/siteNavigation';
+import { setProvider, setWallet } from  '../../../redux/actions/actionCreators/crypto';
 
 import { 
     getWalletProvider, 
@@ -44,7 +45,6 @@ const Nav = () => {
       setProvider(providerObj);
       const walletObj = await getWallet(providerObj);
       setWallet(walletObj);
-    //   isDomainRegistered(providerObj, walletObj);
     }
 
   // have the url ready if the browser needs it :)
@@ -54,6 +54,7 @@ const Nav = () => {
         return;
     }
     setUrl(e.target.value)
+    dispatch(setNonRenderingSearch(e.target.value)) // i want to check every hash -> dont want to force to render the site for this
     // isDomainRegistered(provider, wallet)
   }
 

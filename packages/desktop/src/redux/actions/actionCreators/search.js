@@ -17,3 +17,14 @@ export const setCurrentDomainRegStatus = (approved) => {
         })
     }
 }
+
+// setSearchText will change whats rendered on the screen
+// this is for the demo 
+export const setNonRenderingSearch = (searchText) => {
+    return (dispatch) => {
+        dispatch({
+            type: actions.SET_TEMP_SEARCH,
+            payload: searchText
+        })
+    }
+}
