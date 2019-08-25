@@ -207,23 +207,11 @@ All things sidebar.js
     color: white;
 }
 .sidebar_inner_title Button {
-    background: none;
-	color: white;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
     margin-right: 20px;
 }
 .sidebar_inner_title Button:hover, .sidebar_inner_title Button:active,.sidebar_inner_title Button:not(:active) {
-    background: none;
-	color: white;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
 }
 .sidebar_inner_title Button:hover .st0 {
     fill:#2BB5FF;
@@ -367,7 +355,6 @@ All thing post.js
     padding: 0px 20px 30px 20px;
     border-bottom: 1px dashed #383d42;
 }
-
 .newpost_button_box Button {
     width: 100%;
     margin-top: 10px;
@@ -377,7 +364,6 @@ All thing post.js
     background: #383d42;
     border:none;
 }
-
 .newpost TextArea {
     color:white;
     background: #383d42;
@@ -389,7 +375,78 @@ All thing post.js
 /*
 All thing bids.js
 */
+.newbid {
+    .boxing();
+    padding: 30px 20px 10px 20px;
+}
+.newbid_button_box {
+    .boxing();
+    padding: 0px 20px 30px 20px;
+    border-bottom: 1px dashed #383d42;
+}
+.newbid_button_box Button {
+    width: 100%;
+    margin-top: 10px;
+}
+.newbid Input {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+.newbid TextArea {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+.ant-input-affix-wrapper .ant-input-prefix, .ant-input-affix-wrapper .ant-input-suffix {
+    margin-top: 6px;  
+    color:white;
+}
+.bid_box {
+    .boxing();
+    padding: 20px 20px 20px 20px;
+    flex-direction: column;
+    border-bottom: 1px dashed #383d42;
 
+}
+.bid_box .companyname {
+    color: white;
+    margin: 4px 0;
+}
+.bid_box .bidconditions {
+    color: white;
+    font-size: 1.2rem;
+}
+.bid_content {
+    flex-direction: column;
+}
+.biddescr {
+    font-size: 0.65rem;
+    margin-bottom: 10px;
+}
+.bid_voters {
+    flex-direction: row;
+}
+
+.bid_voters Button {
+    .cleanbutton();
+    width: 40px;
+    height: 40px;
+}
+.bid_voters Button:hover, .bid_voters Button:active, .bid_voters Button:not(:active) {
+    .cleanbutton();
+}
+.bid_voters Button:hover, .bid_voters Button .st0:hover {
+    cursor: pointer;
+}
+.bid_voters Button:hover .st0 {
+    fill: #2BB5FF;
+}
+.bid_content .votessofar {
+    margin-top: 10px;
+}
 
 
 .testbox {
