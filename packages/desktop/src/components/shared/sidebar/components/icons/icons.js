@@ -4,7 +4,7 @@ import { Button } from 'antd';
 const Icons = () => {
     return (
         <div className="icons flex">
-        <Button id="topicsbtn" size="large">
+        <Button id="postbtn" size="large">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 46.7 36.2">
             <path className="st0" d="M31.4,8.7l-0.4,0v0h-1v0l-11.2,0v6.1l-7.2,0V27h16.2v-6.1H35v-7.3v-1v-0.3L31.4,8.7z M26.8,26H12.7V15.8l6.2,0
             v5h8V26z M31.1,12.5V9.7l2.8,2.8H31.1z M34,13.6v6.3H19.8V9.7l10.2,0v3.9H34z"/>

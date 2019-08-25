@@ -4,6 +4,7 @@ import Nav from '../../components/shared/nav'
 import Sidebar from '../../components/shared/sidebar'
 import Browser from '../../components/shared/browser';
 import Finance from '../../components/finance';
+import Bids from '../../components/bids';
 
 const Home = () => {
   const siderOpen = useSelector(state => state.navigation.siderOpen);
@@ -14,7 +15,7 @@ const Home = () => {
       </div>
       <div className="bottom flex">
         {
-          siderOpen ? <Sidebar /> : <Finance />
+          siderOpen ? <Sidebar /> : <Bids />
         }
         <Browser />
       </div>

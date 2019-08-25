@@ -28,6 +28,15 @@ Setting some less-variables
 .heightsidebarcalc {
     height: ~"calc(100vh - 121px)";
 }
+.cleanbutton {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+}
 
 
 /*
@@ -64,13 +73,7 @@ All things nav.js
     padding-right:0;
 }
 .sticky-header .left Button {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
 }
 
 .sticky-header .left Button .st1{
@@ -94,13 +97,7 @@ All things nav.js
     min-width: 50px;
 }
 .sticky-header .right .navbtns Button {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-    outline: inherit;
+    .cleanbutton();
     width: 24px;
     height: 24px;
 }
@@ -204,6 +201,7 @@ All things sidebar.js
     padding: 20px 0 10px 0;
     border-radius: 0px 25px 0px 0px;     
     background-color:black;
+    z-index: 99;
 }
 .sidebar_inner_title h1 {
     color: white;
@@ -234,6 +232,14 @@ All things sidebar.js
     width: 58px;
     height: 58px;
     margin-left:10px;
+}
+.bids_icon {
+    .boxing();
+    padding-top:10px;
+}
+.post_icon {
+    .boxing();
+    padding-top:5px;
 }
 
 .sidebar_inner_content {
@@ -284,7 +290,6 @@ All things sidebar.js
 .button_box Button {
     width: 100%;
     margin-top: 10px;
-
 }
 .button_box Input {
     color:white;
@@ -296,6 +301,95 @@ All things sidebar.js
 }
 
 
+/*
+All thing post.js
+*/
+.post_box {
+    .boxing();
+    padding: 16px 30px 16px 20px;
+    width: inherit;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px dashed #383d42;    
+}
+.post_box:last-child {
+    margin-bottom: 50px;
+}
+.post_voters {
+    width: 16px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 20px;
+}
+.post_voters Button, .post_voters Button:hover, .post_voters Button:active, .post_voters Button:not(:active) {
+    .cleanbutton();
+}
+.post_voters Button {
+    width: inherit;
+    height: 20px;
+    padding: 0;
+    .boxing();
+    align-items: center;
+    justify-content: flex-start;
+}
+.post_voters Button:hover, .post_voters Button svg:hover {
+    cursor:pointer;
+}
+.post_voters Button:hover .st0 {
+    fill: #2BB5FF;
+}
+.post_voters p {
+    width: inherit;
+    text-align: center;
+}
+.post_title_subtitle {
+    font-weight: 300;
+    color: white;
+    flex-direction: column; 
+    margin-top: 8px;
+}
+.post_title_subtitle h2 {
+    color: white;
+    flex-direction: column;
+    font-size: 1.15rem;   
+    line-height: 1.25;
+    margin-bottom: 4px;
+}
+
+.newpost {
+    .boxing();
+    padding: 30px 20px 10px 20px;
+}
+.newpost_button_box {
+    .boxing();
+    padding: 0px 20px 30px 20px;
+    border-bottom: 1px dashed #383d42;
+}
+
+.newpost_button_box Button {
+    width: 100%;
+    margin-top: 10px;
+}
+.newpost Input {
+    color:white;
+    background: #383d42;
+    border:none;
+}
+
+.newpost TextArea {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+
+
+/*
+All thing bids.js
+*/
+
 
 
 .testbox {
@@ -304,13 +398,3 @@ All things sidebar.js
     border:1px solid white;
     background:red;
 }
-
-/*
-All thing finance.js
-*/
-
-
-
-/*
-All thing bids.js
-*/
