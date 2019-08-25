@@ -1,7 +1,7 @@
 import * as actions from '../actions/actionTypes/siteNavigation';
   
   const INITIAL_STATE = {
-    sideNavIndex: 0,
+    sideNavIndex: 10,
     siderOpen: false,
     feed: []
   };

@@ -4,7 +4,6 @@ import 'antd/dist/antd.css';
 import { Input, Tooltip, Icon, Avatar, Button } from 'antd';
 import { setSearchText, setCurrentDomainRegStatus, setNonRenderingSearch } from '../../../redux/actions/actionCreators/search';
 import { setProvider, setWallet } from  '../../../redux/actions/actionCreators/crypto';
-
 import { 
     getWalletProvider, 
     getWallet,
@@ -29,12 +28,10 @@ import {
 } from '../../../service/utils-3box';
 
 const Nav = () => {
+  const dispatch = useDispatch();
   const [url, setUrl] = useState("")
   const siderOpen = useSelector(state => state.navigation.siderOpen);
   const logoLink = 'https://avatars1.githubusercontent.com/u/19377315?s=400&v=4';
-  const dispatch = useDispatch();
-
-  //
   const searchState = useSelector(state => state.search.currentSearch);
   const [provider, setProvider] = useState({})
   const [wallet, setWallet] = useState({})
@@ -53,13 +50,13 @@ const Nav = () => {
     dispatch(setCurrentDomainRegStatus(isRegistered)); //set for finance or others
   }
 
-    // sets wallet and provider
-    const setupUser = async () => {
-      const providerObj = getWalletProvider();
-      setProvider(providerObj);
-      const walletObj = await getWallet(providerObj);
-      setWallet(walletObj);
-    }
+  // sets wallet and provider
+  const setupUser = async () => {
+    const providerObj = getWalletProvider();
+    setProvider(providerObj);
+    const walletObj = await getWallet(providerObj);
+    setWallet(walletObj);
+	}
 
   // have the url ready if the browser needs it :)
   const handleChange = (e) => {
@@ -69,59 +66,48 @@ const Nav = () => {
     }
     setUrl(e.target.value)
     dispatch(setNonRenderingSearch(e.target.value)) // i want to check every hash -> dont want to force to render the site for this
-    // isDomainRegistered(provider, wallet)
   }
 
 	const submit = async() => {
     const url = "https://google.com/dogs5"
     const provider = await get3BoxWalletProvider();
-    console.log({provider})
     // fetch initial topics
     const bobBox = await getBobBox();
     let space = await getDomainSpace(url);
-    console.log({space})
     let thread = await createPostThread(
       url, 
       "This is the title", 
       Math.random().toString(36).substring(7) // Using a random string for description to add randomness
     );
     let threads = await getAllThreads(url);
-    console.log({threads})
+    dispatch(setCommentFeed(threads))
     let postsComment = await commentOnPostThread(url, threads[0].address, "This is a comment");
-    console.log({postsComment})
-    dispatch(setCommentFeed(postsComment))
     let memberThread = await createAdminThread(url);
-    console.log({memberThread});
 	}
-
-	
 
   const toggleSiderMenu = () => {      
     dispatch(toggleSider(!siderOpen))
   };
 
   const checkIfRegistered = () => {
-    console.log('====================================');
-    console.log('onchange', { wallet, provider });
     isDomainRegistered(provider, wallet)
-    console.log('====================================');
   }
 
   return (
     <div className="sticky-header flex">
-        <div className="left flex">
-            <Avatar size={64} src={`${logoLink}`} />
-            <Button  onClick={() => toggleSiderMenu()}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 28 22">
-                    <g id="MENU_BTN" transform="translate(-149 -78)">
-                        <rect className="st1" id="Rectangle_20" width="26" height="2" transform="translate(149 78)"/>
-                        <rect className="st1" id="Rectangle_21" width="26" height="2" transform="translate(149 88)"/>
-                        <rect className="st1" id="Rectangle_22" width="26" height="2" transform="translate(149 98)"/>
-                    </g>
-                </svg>
-            </Button>
-        </div>
-        <div className="mid">
+			<div className="left flex">
+				<Avatar size={64} src={`${logoLink}`} />
+				<Button  onClick={() => toggleSiderMenu()}>
+					<svg xmlns="http://www.w3.org/2000/svg" width="26" height="14" viewBox="0 0 28 22">
+						<g id="MENU_BTN" transform="translate(-149 -78)">
+							<rect className="st1" id="Rectangle_20" width="26" height="2" transform="translate(149 78)"/>
+							<rect className="st1" id="Rectangle_21" width="26" height="2" transform="translate(149 88)"/>
+							<rect className="st1" id="Rectangle_22" width="26" height="2" transform="translate(149 98)"/>
+						</g>
+					</svg>
+				</Button>
+			</div>
+      <div className="mid">
         <Input
         value={url}
         onChange={(e) => handleChange(e)}
@@ -129,19 +115,19 @@ const Nav = () => {
         placeholder="Search or type a URL"
         prefix={
             <svg xmlns="http://www.w3.org/2000/svg" width="13.299" height="11.496" viewBox="0 0 23.299 21.496">
-            <g id="Group_28" data-name="Group 28" transform="translate(0.707 0)">
-                <g id="Ellipse_17" data-name="Ellipse 17" transform="translate(6.601)" fill="none" stroke="#000" strokeWidth="2">
-                <circle cx="7.995" cy="7.995" r="7.995" stroke="none"/>
-                <circle cx="7.995" cy="7.995" r="6.995" fill="none"/>
-                </g>
-                <path id="Path_53" data-name="Path 53" d="M1806.381,2219.2l-8.636,8.636" transform="translate(-1797.744 -2207.047)" fill="none" stroke="#000" strokeWidth="2"/>
-            </g>
+							<g id="Group_28" data-name="Group 28" transform="translate(0.707 0)">
+									<g id="Ellipse_17" data-name="Ellipse 17" transform="translate(6.601)" fill="none" stroke="#000" strokeWidth="2">
+									<circle cx="7.995" cy="7.995" r="7.995" stroke="none"/>
+									<circle cx="7.995" cy="7.995" r="6.995" fill="none"/>
+									</g>
+									<path id="Path_53" data-name="Path 53" d="M1806.381,2219.2l-8.636,8.636" transform="translate(-1797.744 -2207.047)" fill="none" stroke="#000" strokeWidth="2"/>
+							</g>
             </svg>
         }
         />
         </div>
         <Button onClick={() => checkIfRegistered()}> check </Button>
-        <Button onClick={() => submit()}></Button>
+        <Button onClick={() => submit()}> load </Button>
         <div className="right">
             <div className="navbtns">
             <Button>
