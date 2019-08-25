@@ -6,6 +6,7 @@ import Browser from '../../components/shared/browser';
 import Finance from '../../components/finance';
 import Bids from '../../components/bids';
 import Post from '../../components/post';
+import Chat from '../../components/chat';
 
 const Home = () => {
   const siderOpen = useSelector(state => state.navigation.siderOpen);
@@ -16,7 +17,7 @@ const Home = () => {
       </div>
       <div className="bottom flex">
         {
-          siderOpen ? <Sidebar /> : <Bids />
+          siderOpen ? <Sidebar /> : <Chat />
         }
         <Browser />
       </div>
