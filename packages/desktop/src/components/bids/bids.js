@@ -32,11 +32,11 @@ const Bids = () => {
       </div>
       <section id="no_dao_yet">
         <div className="sidebar_inner_content_msg">
-          <h3>No DAO created for this URL.</h3>
-          <p>Creating a DAO will cost you 0.7ETH.</p>
+          <h3>Bids be here</h3>
+          <p>No bids yet.</p>
         </div>
         <div className="button_box">
-            <Button type="primary">Create DAO</Button>
+            <Button type="primary">Create Bid</Button>
           </div>
       </section>
     </div>
