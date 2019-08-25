@@ -85,8 +85,6 @@ const Nav = () => {
     let memberThread = await createAdminThread(url);
 	}
 
-	
-
   const toggleSiderMenu = () => {      
     dispatch(toggleSider(!siderOpen))
   };

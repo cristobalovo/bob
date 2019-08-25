@@ -5,9 +5,8 @@ import Sidebar from '../../components/shared/sidebar'
 import Browser from '../../components/shared/browser';
 import Finance from '../../components/finance';
 import Posts from '../../components/post';
-import Chat from '../../components/finance';
+import Chat from '../../components/chat';
 import Bids from '../../components/bids';
-// import { siteNavigation } from '../../redux/actions/actionCreators/siteNavigation';
 
 const Home = () => {
   const nav = useSelector(state => state.navigation);
@@ -20,7 +19,7 @@ const Home = () => {
       </div>
       <div className="bottom flex">
         {
-          siderOpen ? <Sidebar /> : null
+          siderOpen && sideNavIndex === 10 ? <Sidebar /> : null
         }
         {
           sideNavIndex === 0 && siderOpen ? <Posts /> : null

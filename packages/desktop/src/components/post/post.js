@@ -3,9 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd'
 import { Input } from 'antd';
 const { TextArea } = Input;
+import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators/siteNavigation';
 
 const Post = () => {
   const feed = useSelector(state => state.navigation.feed);
+  const dispatch = useDispatch();
+
+  const closeMenu = () => {
+    dispatch(toggleSider(false))
+    dispatch(siteNavigation(10))
+  }
 
   return (
     <div className="sidebar_inner expanded flex">
@@ -17,19 +24,18 @@ const Post = () => {
           </svg>
         </div>
         <div className="spacer"></div>
-        <Button size="large" shape="circle">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 38.1 36.8">
-          <g>
-            <path className="st0" d="M26.5,26.9c-0.3,0-0.5-0.1-0.7-0.3l-15-15c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l15,15c0.4,0.4,0.4,1,0,1.4
-              C27,26.8,26.8,26.9,26.5,26.9z"/>
-          </g>
-          <g>
-            <path className="st0" d="M11.6,26.9c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l15-15c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-15,15
-              C12.1,26.8,11.8,26.9,11.6,26.9z"/>
-          </g>
-        </svg>
-
-      </Button>
+        <Button size="large" shape="circle" onClick={() => closeMenu()}>
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 38.1 36.8">
+            <g>
+              <path className="st0" d="M26.5,26.9c-0.3,0-0.5-0.1-0.7-0.3l-15-15c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l15,15c0.4,0.4,0.4,1,0,1.4
+                C27,26.8,26.8,26.9,26.5,26.9z"/>
+            </g>
+            <g>
+              <path className="st0" d="M11.6,26.9c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l15-15c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-15,15
+                C12.1,26.8,11.8,26.9,11.6,26.9z"/>
+            </g>
+          </svg>
+        </Button>
       </div>
       <section id="newpostclosed">
         <div className="button_box newtopic">

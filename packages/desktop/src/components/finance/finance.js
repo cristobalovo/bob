@@ -32,7 +32,7 @@ const Finance = () => {
 
   const closeMenu = () => {
     dispatch(toggleSider(false))
-    dispatch(siteNavigation(0))
+    dispatch(siteNavigation(10))
   }
 
   return (

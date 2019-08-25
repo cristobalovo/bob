@@ -1,11 +1,21 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd'
 import { Input } from 'antd';
 const { TextArea } = Input;
+import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators/siteNavigation';
+
 
 const Chat = () => {
+  const dispatch = useDispatch();
+
+  const closeMenu = () => {
+    dispatch(toggleSider(false))
+    dispatch(siteNavigation(10))
+  }
+
   return (
-<div className="sidebar_inner expanded flex">
+    <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
           <div className="sidebar_inner_title_icon post_icon">
           <svg x="0px" y="0px" viewBox="0 0 49 42.6">
@@ -30,7 +40,7 @@ const Chat = () => {
         </div>
         <div className="spacer">
         </div>
-        <Button size="large" shape="circle">
+        <Button size="large" shape="circle" onClick={() => closeMenu()}>
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 38.1 36.8">
             <g>
               <path className="st0" d="M26.5,26.9c-0.3,0-0.5-0.1-0.7-0.3l-15-15c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l15,15c0.4,0.4,0.4,1,0,1.4
