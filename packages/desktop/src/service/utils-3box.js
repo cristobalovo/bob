@@ -9,8 +9,9 @@ export const getBobBox = async() => {
 
 const createBox = async() => {
     const provider = await get3BoxWalletProvider();
+    console.log({provider})
     try {
-        const box = await Box.openBox(provider.address, provider);
+        const box = await Box.openBox(provider.addresses[0], provider);
         await box.public.set('name', 'BoB');
         return box;
     } catch (err) {
@@ -19,7 +20,7 @@ const createBox = async() => {
 }
 
 export const get3BoxWalletProvider = async() => {
-    const HDWalletProvider = require("truffle-privatekey-provider");
+    const HDWalletProvider = require("truffle-hdwallet-provider");
     var provider = new HDWalletProvider("27F2103FD359D41D49FFB702530BB57B778D2E70E89DED7C8B43289A2402C19B", "https://goerli.infura.io/v3/82c35d2e074c4021a54f6fd4c0bde238");
     return provider;
 }
@@ -31,7 +32,7 @@ export const getDomainSpace = async(url) => {
 	const provider = await get3BoxWalletProvider();
 	const urlHex = ethers.utils.id(url);
     try {
-        const box = await Box.openBox(provider.address, provider);
+        const box = await Box.openBox(provider.addresses[0], provider);
         const domainRegistrySpace = await box.openSpace('domainRegistry');
         let urlCheck = await domainRegistrySpace.public.get(url);
         if (urlCheck == undefined || urlCheck == null) {
@@ -51,7 +52,7 @@ export const getDomainSpace = async(url) => {
 
 export const createPostThread = async(url, title, description) => {	
 	const provider = await get3BoxWalletProvider();
-	const box = await Box.openBox(provider.address, provider);
+	const box = await Box.openBox(provider.addresses[0], provider);
     try {
 		const space = await getDomainSpace(url);
 		const postObject = {title, description};
