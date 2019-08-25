@@ -86,10 +86,11 @@ const Nav = () => {
       Math.random().toString(36).substring(7) // Using a random string for description to add randomness
     );
     let threads = await getAllThreads(url);
+    dispatch(setCommentFeed(threads))
     console.log({threads})
     let postsComment = await commentOnPostThread(url, threads[0].address, "This is a comment");
     console.log({postsComment})
-    dispatch(setCommentFeed(postsComment))
+    // dispatch(setCommentFeed(postsComment))
     let memberThread = await createAdminThread(url);
     console.log({memberThread});
 	}
