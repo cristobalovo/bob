@@ -26,13 +26,13 @@ export const contracts = {
 };
 
 export const getWalletProvider = () => {	
-	var provider = new HDWalletProvider(`${process.env.REACT_APP_PRIVATE_KEY}`, "https://goerli.infura.io/v3/82c35d2e074c4021a54f6fd4c0bde238");
+	var provider = new HDWalletProvider(`${process.env.PRIVATE_KEY}`, "https://goerli.infura.io/v3/82c35d2e074c4021a54f6fd4c0bde238");
 	console.log('[getWalletProvider]', { provider});
 	return provider;
 }
 
 export const getWallet = (provider) => {
-	return new ethers.Wallet(`${process.env.REACT_APP_PRIVATE_KEY}`, provider);
+	return new ethers.Wallet(`${process.env.PRIVATE_KEY}`, provider);
 }
 
 export const getContractInstance = (abi, address, pKey) => {
@@ -87,69 +87,133 @@ export const deployDomainDAO = async (_wallet, url, domainRegistryAddress ) => {
 		console.log(`domain DAO deployed at ${response.address}`)
 		const domainSpace = await getDomainSpace(url);
 		await domainSpace.public.set('domainDAOAddress', response.address);
-		await investDomainDAO(_wallet, url, domainRegistryAddress, 1);
+		
+		// TEST
+		// investDomainDAO(url, domainRegistryAddress, 1);
+		// createBidDomainDAO(url, 123, "JSON info");
+		// voteDomainDAO(url, 123, true);
+		// getInvestorEquityDomainDAO(process.env.PUBLIC_KEY)
 		return response.address;
 	} catch (e) {
 		console.log({ e })
 	}
 }
 
-export const investDomainDAO = async (_wallet, url, domainRegistryAddress, amount) => {
+export const investDomainDAO = async (url, domainRegistryAddress, amount) => {
 	const domainSpace = await getDomainSpace(url);
 	let domainDAOAddress = await domainSpace.public.get('domainDAOAddress');
 	let domainDAOInstance = await getDomainDAOInstance(domainDAOAddress);
-	console.log({_wallet});
 	const txData = domainDAOInstance.methods
 	.invest()
 	.encodeABI();
-	const nonce = await web3.eth.getTransactionCount(_wallet.address) + 1;
-	// const gasValue = await domainDAOInstance.methods.invest().estimateGas();
-	// console.log({gasValue})
+	const nonce = await web3.eth.getTransactionCount(process.env.PUBLIC_KEY) + 1;
+	const gasPriceVal = await web3.eth.getGasPrice();
+
 	const rawTx = {
-		nonce,
+		nonce: web3.utils.toHex(nonce),
 		data: txData,
-		value: amount,
-		gasPrice: '0x09184e72a000',
-		gasLimit: '0x2710',
-		gas: 2800000,
-		to: domainDAOAddress
+		value: web3.utils.toHex(amount),
+		gasPrice: web3.utils.toHex(gasPriceVal),
+		gasLimit: web3.utils.toHex(8000000),
+		to: domainDAOAddress,
 	}
-
 	var tx = new Tx(rawTx);
-	console.log(_wallet.privateKey)
-	var privateKey = new Buffer(_wallet.privateKey.slice(2), 'hex')
-	console.log({privateKey})
+	var privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex')
 	tx.sign(privateKey);
-
 	var serializedTx = tx.serialize();
-
-	// console.log(serializedTx.toString('hex'));
-	// 0xf889808609184e72a00082271094000000000000000000000000000000000000000080a47f74657374320000000000000000000000000000000000000000000000000000006000571ca08a8bbf888cfa37bbf0bb965423625641fc956967b81d12e23709cead01446075a01ce999b56a8a88504be365442ea61239198e23d1fce7d00fcfc5cd3b44b7215f
-
-	let receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
-	// console.log({txObj})
-	// console.log({_wallet})
-	// const rawTransaction = await web3.eth.signTransaction(tx, _wallet.privateKey);
-  // const receipt = await web3.eth.sendSignedTransaction(rawTransaction);
-	// console.log({receipt})
+	try {
+		let receipt = web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+		console.log({receipt})
+		receipt.on('transactionHash', hash => {
+			console.log({hash})
+		})
+		const r = await receipt;
+		console.log({receipt: r});
+	} catch (e) {
+		console.error(e)
+	}
 }
 
-// const disburseFunds = async (FundsData, fromAccountAddress, token) => {
-//   const web3 = Web3.connection();
-//   const FundsObject = FundsData;
+export const createBidDomainDAO = async (url, bidID, info) => {
+	const infoHex = web3.utils.toHex(info);
+	const domainSpace = await getDomainSpace(url);
+	console.log({domainSpace})
+	let domainDAOAddress = await domainSpace.public.get('domainDAOAddress');
+	console.log({domainDAOAddress})
+	let domainDAOInstance = await getDomainDAOInstance(domainDAOAddress);
+	const txData = domainDAOInstance.methods
+	.createBid(bidID, infoHex)
+	.encodeABI();
+	const nonce = await web3.eth.getTransactionCount(process.env.PUBLIC_KEY) + 1;
+	const gasPriceVal = await web3.eth.getGasPrice();
 
-//   const instances = await getAccountInstance(fromAccountAddress);
-//   const tx = instances.methods
-//     .disburseFunds(FundsObject.amount, FundsObject.toAccountAddress, FundsObject.octTokenAddress)
-//     .encodeABI();
-// 	const rawTransaction = await web3.eth.signTransaction(tx, _wallet.privateKey);
-//   const receipt = await web3.eth.sendSignedTransaction(rawTransaction);
-// 	console.log(receipt)
-//   if (receipt === null || receipt === undefined) {
-//     return new Error('Failed to create new token in blockchain.');
-//   }
+	const rawTx = {
+		nonce: web3.utils.toHex(nonce),
+		data: txData,
+		gasPrice: web3.utils.toHex(gasPriceVal),
+		gasLimit: web3.utils.toHex(8000000),
+		to: domainDAOAddress,
+	}
+	var tx = new Tx(rawTx);
+	var privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex')
+	tx.sign(privateKey);
+	var serializedTx = tx.serialize();
+	try {
+		let receipt = web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+		console.log({receipt})
+		receipt.on('transactionHash', hash => {
+			console.log({hash})
+		})
+		const r = await receipt;
+		console.log({receipt: r});
+	} catch (e) {
+		console.error(e)
+	}
+}
 
-//   FundsObject.txnHash = receipt.transactionHash;
+export const voteDomainDAO = async (url, bidID, approved) => {
+	const domainSpace = await getDomainSpace(url);
+	console.log({domainSpace})
+	let domainDAOAddress = await domainSpace.public.get('domainDAOAddress');
+	console.log({domainDAOAddress})
+	let domainDAOInstance = await getDomainDAOInstance(domainDAOAddress);
+	const txData = domainDAOInstance.methods
+	.vote(bidID, approved, false)
+	.encodeABI();
+	const nonce = await web3.eth.getTransactionCount(process.env.PUBLIC_KEY) + 1;
+	const gasPriceVal = await web3.eth.getGasPrice();
 
-//   return FundsObject.txnHash;
-// };
+	const rawTx = {
+		nonce: web3.utils.toHex(nonce),
+		data: txData,
+		gasPrice: web3.utils.toHex(gasPriceVal),
+		gasLimit: web3.utils.toHex(8000000),
+		to: domainDAOAddress,
+	}
+	var tx = new Tx(rawTx);
+	var privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex')
+	tx.sign(privateKey);
+	var serializedTx = tx.serialize();
+	try {
+		let receipt = web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+		console.log({receipt})
+		receipt.on('transactionHash', hash => {
+			console.log({hash})
+		})
+		const r = await receipt;
+		console.log({receipt: r});
+	} catch (e) {
+		console.error(e)
+	}
+}
+
+export const getInvestorEquityDomainDAO = async (url, bidID, info) => {
+	const domainSpace = await getDomainSpace(url);
+	console.log({domainSpace})
+	let domainDAOAddress = await domainSpace.public.get('domainDAOAddress');
+	console.log({domainDAOAddress})
+	let domainDAOInstance = await getDomainDAOInstance(domainDAOAddress);
+	console.log({domainDAOInstance})
+	const equityInfo = await domainDAOInstance.methods.getInvestorEquity(process.env.PUBLIC_KEY).call();
+	console.log({equityInfo})
+}
