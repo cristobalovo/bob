@@ -8,7 +8,7 @@ const Post = () => {
   const feed = useSelector(state => state.navigation.feed);
 
   return (
-<div className="sidebar_inner expanded flex">
+    <div className="sidebar_inner expanded flex">
       <div className="sidebar_inner_title flex">
           <div className="sidebar_inner_title_icon post_icon">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 46.7 36.2">

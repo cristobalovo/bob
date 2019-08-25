@@ -12,9 +12,7 @@ import {
     DomainRegistry,
     isUrlInRegistry,
   } from '../../../service/contracts/shared';
-// import { setSearchText } from '../../../redux/actions/actionCreators/search';
 import { hashDomainUrl } from '../../../shared/helpers/domain';
-// import { getWalletProvider } from '../../../shared/helpers/provider';
 import { generateWallet } from '../../../shared/helpers/user';
 import { deployDomainRegistry, deployDomainDAO, deployAdvertisingDAO } from '../../../shared/helpers/deployment';
 import Box from '3box';
