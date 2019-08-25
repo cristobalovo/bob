@@ -16,7 +16,7 @@ const Home = () => {
       </div>
       <div className="bottom flex">
         {
-          siderOpen ? <Sidebar /> : <Bids />
+          siderOpen ? <Sidebar /> : <Post />
         }
         <Browser />
       </div>
