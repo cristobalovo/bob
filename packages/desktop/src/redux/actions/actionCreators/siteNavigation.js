@@ -8,3 +8,12 @@ export const siteNavigation = (index) => {
         })
     }
 }
+
+export const toggleSider = (flag) => {   
+    return (dispatch) => {
+        dispatch({
+            type: actions.TOGGLE_SIDE_MENU,
+            payload: flag
+        })
+    }
+}
