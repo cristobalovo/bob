@@ -1,17 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd'
 import { Input } from 'antd';
 const { TextArea } = Input;
 import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators/siteNavigation';
+import {  createPostThread } from '../../service/utils-3box';
 
 const Post = () => {
+  const [newTopicSelected, setNewTopic] = useState(false);
+  const [inputText, setInput] = useState("");
+  const [areaText, setText] = useState("");
   const feed = useSelector(state => state.navigation.feed);
+  const tempSearchText = useSelector(state => state.search.tempSearchString);
   const dispatch = useDispatch();
 
   const closeMenu = () => {
     dispatch(toggleSider(false))
     dispatch(siteNavigation(10))
+  }
+
+  const createNewTopic = () => {
+    console.log('new topic created');
+    setNewTopic(true);
+  }
+
+  const createNewThread = () => {
+    console.log('new thread created');
+  }
+
+  const submiteNewTopic = () => {
+    console.log('submitTopic');
+    console.log({ inputText, areaText });
+    createPostThread(tempSearchText, inputText, areaText);
+    console.log('after thread xraetion');
+    setNewTopic(true)
+  }
+
+  const handleInputChange = (e) => {
+    console.log('handleInputChange', { e });
+    setInput(e.target.value);
+  }
+
+  const handleTextAreaChange = (e) => {
+    console.log('handleInputChange', { e });
+    setText(e.target.value);
   }
 
   return (
@@ -37,23 +69,30 @@ const Post = () => {
           </svg>
         </Button>
       </div>
-      <section id="newpostclosed">
-        <div className="button_box newtopic">
-          <Button type="primary">+ New topic</Button>
-        </div>
-      </section>
-      <section id="newpostopen">
-        <div className="newpost">
-          <Input placeholder="Title of topic" />
-          <TextArea
-            placeholder="Content of topic"
-            autosize={{ minRows: 4, maxRows: 10 }}
-          />
-        </div>
-        <div className="newpost_button_box">
-          <Button type="primary">Submit</Button>
-        </div>
-      </section>
+    
+      {
+        newTopicSelected 
+        ? <section id="newpostopen">
+            <div className="newpost">
+              <Input placeholder="Title of topic" value={inputText} onChange={(e) => handleInputChange(e)}/>
+              <TextArea
+                placeholder="Content of topic"
+                autosize={{ minRows: 4, maxRows: 10 }}
+                value={areaText}
+                onChange={(e) => handleTextAreaChange(e)}
+              />
+            </div>
+            <div className="newpost_button_box">
+              <Button type="primary" onClick={() => submiteNewTopic()}>Submit</Button>
+            </div>
+          </section>
+          : <section id="newpostclosed">
+              <div className="button_box newtopic">
+                <Button type="primary" onClick={() => createNewTopic()}>+ New topic</Button>
+              </div>
+            </section>
+      }
+      
 
       {
         feed && feed.map((item, i) => {
