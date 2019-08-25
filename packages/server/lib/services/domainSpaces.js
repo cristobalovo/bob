@@ -25,7 +25,7 @@ var createBox = async function createBox() {
 
 var get3BoxWalletProvider = exports.get3BoxWalletProvider = async function get3BoxWalletProvider() {
     var HDWalletProvider = require("truffle-privatekey-provider");
-    var provider = new HDWalletProvider("27F2103FD359D41D49FFB702530BB57B778D2E70E89DED7C8B43289A2402C19B", "https://goerli.infura.io/v3/82c35d2e074c4021a54f6fd4c0bde238");
+    var provider = new HDWalletProvider("4863D94395EE3BD91BAF40031874256E0DE86429FF7AD6F106F80EDDE6BBCB25", "https://goerli.infura.io/v3/82c35d2e074c4021a54f6fd4c0bde238");
     return provider;
 };
 
