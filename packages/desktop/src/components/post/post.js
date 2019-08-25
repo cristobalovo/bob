@@ -58,9 +58,9 @@ const Post = () => {
           // }
 
           let hasError = null;
-
+          let itemJson;
           try {
-            const itemJson = JSON.parse(item.message);
+            itemJson = JSON.parse(item.message);
             console.log({ itemJson });
           } catch (e) {
             console.log('====================================');
@@ -73,7 +73,7 @@ const Post = () => {
           
 
           return (
-            <div className="post_box flex">
+            <div className="post_box flex" key={i}>
               <div className="post_voters flex">
                 <Button>
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 15.4 9.4">
@@ -90,8 +90,14 @@ const Post = () => {
                 </Button>
               </div>
               <div className="post_title_subtitle flex">
-                <h2>Title, baby!</h2>
-                <p>Does content come here?</p>
+                {
+                  hasError === null ? <h2> { itemJson.title } </h2>  : null  
+                }
+                {
+                   hasError === null ? <p> { itemJson.description } </p>  : <p> {item.message} </p>  
+                }
+                {/* <h2>Title, baby!</h2> */}
+                {/* <p>Does content come here?</p> */}
               </div>
             </div>
           )
