@@ -1,0 +1,2 @@
+export const SET_SIDE_NAV = 'SET_SIDE_NAV';
+export const TOGGLE_SIDE_MENU = 'TOGGLE_SIDE_MENU';

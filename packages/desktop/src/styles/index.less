@@ -2,3 +2,399 @@
 @import './reset.less';
 @import './flex-layout.less';
 @import './common.less';
+
+/* 
+Clearing all unnecesarry ant-design code
+*/ 
+#app {
+    margin:0px;
+    padding:0px;
+    font-family: 'Muli', sans-serif;
+}
+
+/*
+Setting some less-variables
+*/
+.boxing {
+    box-sizing: border-box;
+}
+.sticky-header-paddings {
+    padding: 20px 20px 15px 20px;
+    .boxing();
+}
+.heightcalc {
+    height: ~"calc(100vh - 101px)";
+}
+.heightsidebarcalc {
+    height: ~"calc(100vh - 121px)";
+}
+.cleanbutton {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+}
+
+
+/*
+All things home.js
+*/
+.canvas {
+    flex-direction: column;
+    height: 100vh;
+}
+
+.canvas .bottom {
+    flex-direction: row;
+    .heightcalc();
+}
+
+
+/*
+All things nav.js
+*/
+.sticky-header {
+    position:sticky;
+    top: 0;
+    width: 100%;
+    background: white;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #F4F4F4;
+}
+.sticky-header .left {
+    .sticky-header-paddings();
+    align-items: center;
+    justify-content: center;
+    padding-right:0;
+}
+.sticky-header .left Button {
+    .cleanbutton();
+}
+
+.sticky-header .left Button .st1{
+    fill:black;
+}
+.sticky-header .left Button:hover .st1{
+    fill:#2BB5FF;
+}
+.sticky-header .left Button:active .st1{
+    outline:none;
+}
+
+.sticky-header .mid {
+    .sticky-header-paddings();
+    flex: 1;
+}
+.sticky-header .right {
+    .sticky-header-paddings();
+    padding-right: 40px;
+    padding-left: 0;
+    min-width: 50px;
+}
+.sticky-header .right .navbtns Button {
+    .cleanbutton();
+    width: 24px;
+    height: 24px;
+}
+.sticky-header .mid Input {
+    background: #F4F4F4;
+    border-radius: 35px;
+    border:none;
+    .boxing();
+    padding: 20px;    
+}
+.ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 40px;
+}
+.ant-input-affix-wrapper .ant-input-prefix {
+    left: 15px;
+}
+
+/*
+All things browser.js
+*/
+.browser {
+    width: 100vw;
+    .heightcalc();
+}
+webview {
+    width: 100%;
+    .heightcalc();
+}
+
+
+/*
+All things sidebar.js
+*/
+.sidebar {
+    position: absolute;
+    background: black;
+    .heightsidebarcalc();
+    margin-top: 20px;
+}
+.collapsed {
+    width: 88px;
+    border-radius: 0px 25px 0px 0px;  
+}
+.expanded {
+    width: 33vw;
+    // max-width: 500px;
+    border-radius: 0px 25px 0px 0px;     
+}
+
+.sidebar .icons {
+    width: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .boxing();
+    padding: 35px 0 35px 0;
+}
+
+.sidebar .icons Button:first-child {
+    margin-bottom: 5px;
+} 
+
+.sidebar .icons Button {
+    margin-bottom: 15px;
+    background-color: black;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: none;
+}
+
+.st0{
+    fill:white;
+}
+.st3{
+    fill: #383d42;
+}
+.sidebar .icons Button:hover .st0 {
+    fill:#2BB5FF;
+}
+.spacer {
+    flex:1;
+}
+.sidebar_inner {
+    position: absolute;
+    background: black;
+    .heightsidebarcalc();
+    .boxing();
+    overflow-y: scroll;
+    margin-top: 20px;
+    flex-direction: column;
+}
+.sidebar_inner_title {
+    position: sticky;
+    top:0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    .boxing();
+    border-bottom: 1px dashed #383d42;
+    padding: 20px 0 10px 0;
+    border-radius: 0px 25px 0px 0px;     
+    background-color:black;
+    z-index: 99;
+}
+.sidebar_inner_title h1 {
+    color: white;
+}
+.sidebar_inner_title Button {
+    background: none;
+	color: white;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    margin-right: 20px;
+}
+.sidebar_inner_title Button:hover, .sidebar_inner_title Button:active,.sidebar_inner_title Button:not(:active) {
+    background: none;
+	color: white;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+}
+.sidebar_inner_title Button:hover .st0 {
+    fill:#2BB5FF;
+}
+.sidebar_inner_title_icon {
+    width: 58px;
+    height: 58px;
+    margin-left:10px;
+}
+.bids_icon {
+    .boxing();
+    padding-top:10px;
+}
+.post_icon {
+    .boxing();
+    padding-top:5px;
+}
+
+.sidebar_inner_content {
+    flex:1;
+    flex-direction: column;
+}
+
+.sidebar_inner_content_msg {
+    text-align: center;
+    .boxing();
+    padding: 20px 20px 0px 20px;
+}
+.sidebar_inner_content_msg h3 {
+    color: white;
+}
+.metrics {
+    flex-direction: column;
+}
+
+.metric_box {
+    .boxing();
+    padding: 20px;
+    width: inherit;
+    flex-direction: column;
+    border-bottom: 1px dashed #383d42;
+}
+
+.metric {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: white;
+}
+
+.metric_value h1 {
+    color: white;
+}
+.metric_value h1 {
+    color: white;
+}
+.metric_expression {
+    margin: 0 0 2px 8px;
+}
+.button_box {
+    .boxing();
+    padding: 20px;
+}
+.button_box Button {
+    width: 100%;
+    margin-top: 10px;
+}
+.button_box Input {
+    color:white;
+    background: #383d42;
+    border:none;
+}
+.button_box .ant-input-suffix {
+    color:white;
+}
+
+
+/*
+All thing post.js
+*/
+.post_box {
+    .boxing();
+    padding: 16px 30px 16px 20px;
+    width: inherit;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px dashed #383d42;    
+}
+.post_box:last-child {
+    margin-bottom: 50px;
+}
+.post_voters {
+    width: 16px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 20px;
+}
+.post_voters Button, .post_voters Button:hover, .post_voters Button:active, .post_voters Button:not(:active) {
+    .cleanbutton();
+}
+.post_voters Button {
+    width: inherit;
+    height: 20px;
+    padding: 0;
+    .boxing();
+    align-items: center;
+    justify-content: flex-start;
+}
+.post_voters Button:hover, .post_voters Button svg:hover {
+    cursor:pointer;
+}
+.post_voters Button:hover .st0 {
+    fill: #2BB5FF;
+}
+.post_voters p {
+    width: inherit;
+    text-align: center;
+}
+.post_title_subtitle {
+    font-weight: 300;
+    color: white;
+    flex-direction: column; 
+    margin-top: 8px;
+}
+.post_title_subtitle h2 {
+    color: white;
+    flex-direction: column;
+    font-size: 1.15rem;   
+    line-height: 1.25;
+    margin-bottom: 4px;
+}
+
+.newpost {
+    .boxing();
+    padding: 30px 20px 10px 20px;
+}
+.newpost_button_box {
+    .boxing();
+    padding: 0px 20px 30px 20px;
+    border-bottom: 1px dashed #383d42;
+}
+
+.newpost_button_box Button {
+    width: 100%;
+    margin-top: 10px;
+}
+.newpost Input {
+    color:white;
+    background: #383d42;
+    border:none;
+}
+
+.newpost TextArea {
+    color:white;
+    background: #383d42;
+    border:none;
+    margin-top: 10px;  
+}
+
+
+/*
+All thing bids.js
+*/
+
+
+
+.testbox {
+    height: 20px;
+    width: inherit;
+    border:1px solid white;
+    background:red;
+}
