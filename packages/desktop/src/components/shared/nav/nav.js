@@ -61,28 +61,29 @@ const Nav = () => {
   // have the url ready if the browser needs it :)
   const handleChange = (e) => {
     if (e.key === 'Enter') {
-        dispatch(setSearchText(url)) // will change what is displayed in the browser
+        submit('http://' + e.target.value);
+        dispatch(setSearchText('http://' + url)) // will change what is displayed in the browser
         return;
     }
     setUrl(e.target.value)
     dispatch(setNonRenderingSearch(e.target.value)) // i want to check every hash -> dont want to force to render the site for this
   }
 
-	const submit = async() => {
-    const url = "https://google.com/dogs5"
-    const provider = await get3BoxWalletProvider();
-    // fetch initial topics
-    const bobBox = await getBobBox();
-    let space = await getDomainSpace(url);
-    let thread = await createPostThread(
-      url, 
-      "This is the title", 
-      Math.random().toString(36).substring(7) // Using a random string for description to add randomness
-    );
+	const submit = async(url) => {
+    // const urlHash = window.location.hashDomainUrl(window.location.href);
+    // console.log({urlHash});
+    // console.log({url})
+    // const provider = await get3BoxWalletProvider();
+    // let space = await getDomainSpace(url);
+    // let thread = await createPostThread(
+    //   url, 
+    //   "This is the new title", 
+    //   Math.random().toString(36).substring(7) // Using a random string for description to add randomness
+    // );
     let threads = await getAllThreads(url);
     dispatch(setCommentFeed(threads))
-    let postsComment = await commentOnPostThread(url, threads[0].address, "This is a comment");
-    let memberThread = await createAdminThread(url);
+    // let postsComment = await commentOnPostThread(url, threads[0].address, "This is a new comment");
+    // let memberThread = await createAdminThread(url);
 	}
 
   const toggleSiderMenu = () => {      
