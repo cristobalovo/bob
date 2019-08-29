@@ -4,7 +4,7 @@ import { Button } from 'antd'
 import { Input } from 'antd';
 const { TextArea } = Input;
 import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators/siteNavigation';
-import {  createPostThread } from '../../service/utils-3box';
+import { createPostThread } from '../../service/utils-3box';
 
 const Post = () => {
   const [newTopicSelected, setNewTopic] = useState(false);
@@ -28,21 +28,21 @@ const Post = () => {
     console.log('new thread created');
   }
 
-  const submiteNewTopic = () => {
+  const submitNewTopic = () => {
     console.log('submitTopic');
     console.log({ inputText, areaText });
-    createPostThread(tempSearchText, inputText, areaText);
-    console.log('after thread xraetion');
+    console.log(tempSearchText)
+    const url = 'http://' + tempSearchText;
+    createPostThread(url, inputText, areaText);
+    console.log('after thread creation');
     setNewTopic(true)
   }
 
   const handleInputChange = (e) => {
-    console.log('handleInputChange', { e });
     setInput(e.target.value);
   }
 
   const handleTextAreaChange = (e) => {
-    console.log('handleInputChange', { e });
     setText(e.target.value);
   }
 
@@ -83,7 +83,7 @@ const Post = () => {
               />
             </div>
             <div className="newpost_button_box">
-              <Button type="primary" onClick={() => submiteNewTopic()}>Submit</Button>
+              <Button type="primary" onClick={() => submitNewTopic()}>Submit</Button>
             </div>
           </section>
           : <section id="newpostclosed">

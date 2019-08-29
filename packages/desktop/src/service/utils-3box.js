@@ -34,10 +34,10 @@ export const getDomainSpace = async(url) => {
     try {
         const box = await Box.openBox(provider.addresses[0], provider);
         const domainRegistrySpace = await box.openSpace('domainRegistry');
-        let urlCheck = await domainRegistrySpace.public.get(url);
+        let urlCheck = await domainRegistrySpace.public.get(urlHex);
         if (urlCheck == undefined || urlCheck == null) {
           console.log(`Creating new url space at ${url}`);
-          await domainRegistrySpace.public.set(url, true);
+          await domainRegistrySpace.public.set(urlHex, true);
         } else {
           console.log('Using existing space')
         }
@@ -51,14 +51,14 @@ export const getDomainSpace = async(url) => {
 }
 
 export const createPostThread = async(url, title, description) => {	
-	const provider = await get3BoxWalletProvider();
-	const box = await Box.openBox(provider.addresses[0], provider);
+    let space = await getDomainSpace(url);
     try {
-		const space = await getDomainSpace(url);
 		const postObject = {title, description};
 		const postObjectHex = ethers.utils.id(JSON.stringify(postObject));
         const publicThread = await space.joinThread(postObjectHex, {firstModerator: FIRST_MOD});
-		await publicThread.post(JSON.stringify(postObject));
+        await publicThread.post(JSON.stringify(postObject));
+        console.log('Post made')
+        console.log({postObject})
 		const postDirThread = await space.joinThread('postDirectory', {firstModerator: FIRST_MOD});
 		await postDirThread.post(publicThread._address); // Posts address of thread to directory so all threads can be rendered
 		return(publicThread);
