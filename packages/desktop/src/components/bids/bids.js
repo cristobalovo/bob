@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import { Input } from 'antd';
-const { TextArea } = Input;
 import { toggleSider, siteNavigation  } from '../../redux/actions/actionCreators/siteNavigation';
+
+const { TextArea } = Input;
 
 const Bids = () => {
   const dispatch = useDispatch();
