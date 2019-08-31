@@ -7,7 +7,6 @@ const Icons = () => {
 	const dispatch = useDispatch();
 
 	const handleChange = (index) => {
-		console.log({ index });
 		dispatch(siteNavigation(index))
 	}
 

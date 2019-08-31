@@ -47,8 +47,9 @@ const Post = () => {
   }
 
   return (
-    <div className="sidebar_inner expanded flex">
-      <div className="sidebar_inner_title flex">
+    // <div className="sidebar_inner expanded flex">
+    <div>
+      {/* <div className="sidebar_inner_title flex">
           <div className="sidebar_inner_title_icon post_icon">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 46.7 36.2">
               <path className="st3" d="M31.4,8.7l-0.4,0v0h-1v0l-11.2,0v6.1l-7.2,0V27h16.2v-6.1H35v-7.3v-1v-0.3L31.4,8.7z M26.8,26H12.7V15.8l6.2,0
@@ -68,7 +69,7 @@ const Post = () => {
             </g>
           </svg>
         </Button>
-      </div>
+      </div> */}
     
       {
         newTopicSelected 

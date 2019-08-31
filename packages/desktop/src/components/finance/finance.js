@@ -36,8 +36,9 @@ const Finance = () => {
   }
 
   return (
-    <div className="sidebar_inner expanded flex">
-      <div className="sidebar_inner_title flex">
+    // <div className="sidebar_inner expanded flex">
+    <div>
+      {/* <div className="sidebar_inner_title flex">
         <div className="sidebar_inner_title_icon">
           <svg x="0px" y="0px" viewBox="0 0 38.1 36.8">
                 <path className="st3" d="M24.3,9.2c-0.3,0-0.5,0.2-0.5,0.5s0.2,0.5,0.5,0.5h2.1l-7.3,7.3L16,14.4l-6.3,6.3c-0.2,0.2-0.2,0.5,0,0.7
@@ -71,7 +72,7 @@ const Finance = () => {
             </g>
           </svg>
         </Button>
-      </div>
+      </div> */}
 
       {
         !isDomainRegistered

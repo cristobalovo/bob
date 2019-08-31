@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Posts from '../../post';
 import Finance from '../../finance';
 import Chat from '../../chat';
 import Bids from '../../bids';
 import Sidebar from '../sidebar';
+import Header from './components/header';
 
 const Overlay = () => {
 	const nav = useSelector(state => state.navigation);
@@ -32,7 +33,13 @@ const Overlay = () => {
 	
   return (
 		<div>
-			 { getOverlay() }
+      {
+        siderOpen && 
+        <div className="sidebar_inner expanded flex"> 
+          <Header index={sideNavIndex} />
+          { getOverlay() }
+        </div>
+      }
 		</div>
 	)
 }

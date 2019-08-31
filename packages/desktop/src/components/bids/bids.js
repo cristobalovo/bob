@@ -51,8 +51,9 @@ const Bids = () => {
   }
 
   return (
-    <div className="sidebar_inner expanded flex">
-      <div className="sidebar_inner_title flex">
+    // <div className="sidebar_inner expanded flex">
+    <div>
+      {/* <div className="sidebar_inner_title flex">
         <div className="sidebar_inner_title_icon bids_icon">
             <svg x="0px" y="0px" viewBox="0 0 47 29.6">
                 <g>
@@ -76,7 +77,7 @@ const Bids = () => {
             </g>
           </svg>
         </Button>
-      </div>
+      </div> */}
 
 
       {/* <section id="no_bids_yet">
