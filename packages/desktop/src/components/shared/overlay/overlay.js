@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import Posts from '../../post';
 import Finance from '../../finance';
@@ -32,7 +32,7 @@ const Overlay = () => {
 	}
 	
   return (
-		<div>
+		<Fragment>
       {
         siderOpen && 
         <div className="sidebar_inner expanded flex"> 
@@ -40,7 +40,7 @@ const Overlay = () => {
           { getOverlay() }
         </div>
       }
-		</div>
+		</Fragment>
 	)
 }
 
