@@ -1,0 +1,12 @@
+[
+	{
+			"conditions": "0.5 ETH for 10 days",
+			"company": "Paper Inc.",
+			"desc": "You would love our amazing paper, fill out these questions and get 0.1 eth."
+	},
+	{
+			"conditions": "10 ETH for 365 days",
+			"company": "Amazon V2",
+			"desc": "Use V2 to buy all your normal Amazon products."
+	}
+]
